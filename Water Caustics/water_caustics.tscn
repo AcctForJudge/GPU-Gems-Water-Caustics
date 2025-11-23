@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://stq87prix5hb"]
+
+[ext_resource type="Shader" uid="uid://b3job8j4h06d7" path="res://Water Caustics/water.gdshader" id="1_e5u5i"]
+[ext_resource type="Shader" uid="uid://bl2layc1fglud" path="res://Water Caustics/water_caustics.gdshader" id="2_aw00b"]
+[ext_resource type="Texture2D" uid="uid://d1l2jyar88m2h" path="res://textures/ground.jpg" id="3_2ehid"]
+[ext_resource type="Texture2D" uid="uid://hpumv43cs6b5" path="res://textures/lightmap.jpg" id="4_2ehid"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ehid"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_r1mns"]
+sky_material = SubResource("ProceduralSkyMaterial_2ehid")
+
+[sub_resource type="Environment" id="Environment_cxqbc"]
+background_mode = 2
+sky = SubResource("Sky_r1mns")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ecny"]
+render_priority = 0
+shader = ExtResource("1_e5u5i")
+shader_parameter/colour = Color(0.002035257, 0.00019281179, 0.7436846, 1)
+shader_parameter/transparency = 0.90999997965968
+shader_parameter/mettalic = 0.0
+shader_parameter/roughness = 0.10999999754128
+shader_parameter/specular = 0.45999998971808
+shader_parameter/octaves = 3
+shader_parameter/amplitude = 0.026000001235
+shader_parameter/frequency = 0.02999999932944
+shader_parameter/factor = 1.0
+shader_parameter/speed = 2.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m5fo6"]
+size = Vector2(20, 20)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppod3"]
+render_priority = 0
+shader = ExtResource("2_aw00b")
+shader_parameter/light_distance = 0.00400000019
+shader_parameter/water_height = 0.08500000403750001
+shader_parameter/ground = ExtResource("3_2ehid")
+shader_parameter/light_map = ExtResource("4_2ehid")
+shader_parameter/octaves = 3
+shader_parameter/amplitude = 0.026000001235
+shader_parameter/frequency = 0.02999999932944
+shader_parameter/factor = 1.0
+shader_parameter/speed = 2.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ig86v"]
+size = Vector2(20, 20)
+
+[node name="WaterCaustics" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cxqbc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.4492411, 0.8934107, 0, -0.8934107, -0.4492411, 0, 0, 0)
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 5.0170317, 0)
+material_override = SubResource("ShaderMaterial_5ecny")
+mesh = SubResource("PlaneMesh_m5fo6")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5444813, 0)
+material_override = SubResource("ShaderMaterial_ppod3")
+mesh = SubResource("PlaneMesh_ig86v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.5362393, 0.4530441, -0.7121786, -7.450581e-09, 0.8437476, 0.5367401, 0.844066, -0.28782117, 0.4524507, -18.438639, 11.412917, 12.099441)
