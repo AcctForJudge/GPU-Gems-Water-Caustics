@@ -7,5 +7,5 @@ Soooo, i took a lot of help from [here](https://github.com/ColtonASimmons/GPU-Ge
 
 ## Screenshots ##
 ![caustic screenshot](https://github.com/AcctForJudge/GPU-Gems-Water-Caustics/blob/main/Screenshots/Screenshot1.png)
-![caustic gif]((https://github.com/AcctForJudge/GPU-Gems-Water-Caustics/blob/main/Screenshots/caustic.gif))
+![caustic gif](https://github.com/AcctForJudge/GPU-Gems-Water-Caustics/blob/main/Screenshots/caustic.gif)
 gif is highly compressed 💀
